@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+case $1 in
+  *png|*jpg|*jpe|*jpeg|*gif)
+    setsid feh --scale-down "$1" >/dev/null 2>&1 & ;;
+  *)
+    $BROWSER $1 >/dev/null 2>&1 & ;;
+esac
+

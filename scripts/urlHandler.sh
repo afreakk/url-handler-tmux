@@ -1,5 +1,10 @@
 #! /usr/bin/env bash
 
+
+DEFAULT_CMD=$1
+IMG_VIEW_CMD=$2
+TUBE_VIEW_CMD=$3
+
 # Regex to look for common URL patterns.
 urlregex="(((http|https)://|www\\.)[a-zA-Z0-9.]+[:]?[a-zA-Z0-9./@$&%?~\\+!,:#=_-]+)"
 
@@ -17,15 +22,13 @@ urls="$(tmux capture-pane -Jp |               # Capture the currently visible Tm
 # Show the 10 newest links in rofi for interactive selection.
 selected="$(echo "$urls" | rofi -dmenu -i -p 'Open URL' -l 10)"
 
-# If a URL is selected open it.
-if [[ $selected != "" ]]; then
-  # Find the current directory path.
-  CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+[ -z "$selected" ] && exit
 
-  # Check if app.sh is present and if it's executable.
-  if [[ -x "$CURRENT_DIR/app.sh" ]]; then
-    setsid sh -c "$CURRENT_DIR/app.sh $selected"
-  else
-    setsid $BROWSER "$selected" >/dev/null 2>&1 &
-  fi
-fi
+case "$selected" in
+  *mkv|*webm|*mp4|*youtube.com/watch*|*youtube.com/playlist*|*youtu.be*|*hooktube.com*|*bitchute.com*|*videos.lukesmith.xyz*)
+    setsid -f "$TUBE_VIEW_CMD" "$selected" >/dev/null 2>&1 ;;
+  *png|*jpg|*jpe|*jpeg|*gif)
+    setsid -f "$IMG_VIEW_CMD"  "$selected" >/dev/null 2>&1 & ;;
+  *)
+    setsid -f "$DEFAULT_CMD" "$selected" >/dev/null 2>&1
+esac

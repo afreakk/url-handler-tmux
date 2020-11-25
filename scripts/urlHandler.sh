@@ -1,7 +1,5 @@
 #! /usr/bin/env bash
 
-set -euo pipefail
-
 # Regex to look for common URL patterns.
 urlregex="(((http|https)://|www\\.)[a-zA-Z0-9.]+[:]?[a-zA-Z0-9./@$&%?~\\+!,:#=_-]+)"
 
@@ -14,7 +12,7 @@ urls="$(tmux capture-pane -Jp |               # Capture the currently visible Tm
 	tac)"                                       # Reverse the link order.
 
 # If no URLs were found exit.
-[ -z "$urls" ] && exit
+[ -z "$urls" ] && exit 0
 
 # Show the 10 newest links in rofi for interactive selection.
 selected="$(echo "$urls" | rofi -dmenu -i -p 'Open URL' -l 10)"

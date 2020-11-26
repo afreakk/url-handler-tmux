@@ -4,15 +4,29 @@ Simple URL handler plugin for Tmux. The plugin will search the currently visible
 The 10 newest links discovered will be shown in rofi in descending order. Upon Selection the URL will
 be opened using the browser configured in the `$BROWSER` environment variable.
 
-If you want certain URLs to be opened using a custom application you should create a script named `app.sh`
-in the [/scripts](./scripts) directory and make it executable. Then add specific application logic here.
-For an idea on how this can be done take a look at the [app.sh_example](./scripts/app.sh_example) file which
-shows custom logic for opening URLs ending with image extensions and opening them with `feh`.
-
 ## Usage
 
-The plugin can be activated by executing `./urlHandler.tmux` After this the functionality can be invoked by
+The plugin can be activated by executing `./url_handler_tmux.tmux` After this the functionality can be invoked by
 using the `prefix + u` keybinding.
+
+## Options
+
+To specify what app to use for opening urls like
+`*mkv|*webm|*mp4|*youtube.com/watch*|*youtube.com/playlist*|*youtu.be*|*hooktube.com*|*bitchute.com*|*videos.lukesmith.xyz`
+```
+set -g @tube-view-cmd 'mpv'
+```
+To specify what app to use for opening urls like
+`*png|*jpg|*jpe|*jpeg|*gif`
+```
+set -g @img-view-cmd 'feh'
+```
+To specify what app to use for opening the rest of urls
+```
+set -g @default-cmd 'chromium'
+```
+
+Everyone of them defaults to $BROWSER if unspecified
 
 ## Dependencies
 

@@ -1,9 +1,10 @@
-#! /usr/bin/env bash
+#!/usr/bin/env bash
 
 
-DEFAULT_CMD=$1
-IMG_VIEW_CMD=$2
-TUBE_VIEW_CMD=$3
+DMENU_CMD=$1
+DEFAULT_CMD=$2
+IMG_VIEW_CMD=$3
+TUBE_VIEW_CMD=$4
 
 # Regex to look for common URL patterns.
 urlregex="(((http|https)://|www\\.)[a-zA-Z0-9.]+[:]?[a-zA-Z0-9./@$&%?~\\+!,:#=_-]+)"
@@ -20,15 +21,15 @@ urls="$(tmux capture-pane -Jp |               # Capture the currently visible Tm
 [ -z "$urls" ] && exit 0
 
 # Show the 10 newest links in rofi for interactive selection.
-selected="$(echo "$urls" | rofi -dmenu -i -p 'Open URL' -l 10)"
+selected="$(echo "$urls" | $DMENU_CMD)"
 
 [ -z "$selected" ] && exit
 
 case "$selected" in
   *mkv|*webm|*mp4|*youtube.com/watch*|*youtube.com/playlist*|*youtu.be*|*hooktube.com*|*bitchute.com*|*videos.lukesmith.xyz*)
-    setsid -f "$TUBE_VIEW_CMD" "$selected" >/dev/null 2>&1 ;;
+    eval $TUBE_VIEW_CMD ;;
   *png|*jpg|*jpe|*jpeg|*gif)
-    setsid -f "$IMG_VIEW_CMD"  "$selected" >/dev/null 2>&1 & ;;
+    eval $IMG_VIEW_CMD ;;
   *)
-    setsid -f "$DEFAULT_CMD" "$selected" >/dev/null 2>&1
+    eval $DEFAULT_CMD
 esac

@@ -27,8 +27,8 @@ Add to `~/.tmux.conf`:
 ```
 # optional set -g options
 set -g @dmenu-cmd 'dmenu -l 10'
-set -g @img-view-cmd 'setsid -f feh $selected > /dev/null'
-set -g @tube-view-cmd 'setsid -f mpv $selected > /dev/null'
+set -g @primary-img-view-cmd 'setsid -f feh $selected > /dev/null'
+set -g @primary-tube-view-cmd 'setsid -f mpv $selected > /dev/null'
 # this line is required
 run-shell /path/to/url_handler_tmux.tmux
 ```

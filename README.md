@@ -19,7 +19,7 @@ or
 `@alternate-default-cmd` `@alternate-img-view-cmd` `@alternate-tube-view-cmd` (all of them is `echo -n $selected | xclip -i -sel p -f | xclip -i -sel c` by default)  
 
 primary is bound to `prefix + u` by default, but can be changed by setting `@primary-url-handler-hotkey`  
-alternate is bound to `prefix + u` by default, but can be changed by setting `@alternate-url-handler-hotkey`  
+alternate is bound to `prefix + U` by default, but can be changed by setting `@alternate-url-handler-hotkey`  
 
 ## Installation
 

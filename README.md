@@ -1,7 +1,7 @@
 # urlHandler.tmux
 
 Url handler will search the currently visible Tmux buffer for URLs.  
-The 10 most recent links will be shown in dmenu configured app (rofi by default).  
+The URLs will be shown in dmenu configured app (rofi by default).  
 Selected element will go through:  
 ```
 case "$selected" in
@@ -14,9 +14,9 @@ case "$selected" in
 esac
 ```
 So you can specify what you want to do with the URL in one of  
-`@primary-default-cmd` `@primary-img-view-cmd` `@primary-tube-view-cmd` (all of them is `setsid -f $BROWSER $selected > /dev/null 2>&1` by default)  
+`@primary-default-cmd` `@primary-img-view-cmd` `@primary-tube-view-cmd` (all of them are set to `setsid -f $BROWSER $selected > /dev/null 2>&1` by default)  
 or  
-`@alternate-default-cmd` `@alternate-img-view-cmd` `@alternate-tube-view-cmd` (all of them is `echo -n $selected | xclip -i -sel p -f | xclip -i -sel c` by default)  
+`@alternate-default-cmd` `@alternate-img-view-cmd` `@alternate-tube-view-cmd` (all of them are set to `echo -n $selected | xclip -i -sel p -f | xclip -i -sel c` by default)  
 
 primary is bound to `prefix + u` by default, but can be changed by setting `@primary-url-handler-hotkey`  
 alternate is bound to `prefix + U` by default, but can be changed by setting `@alternate-url-handler-hotkey`  

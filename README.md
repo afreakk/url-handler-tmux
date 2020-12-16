@@ -16,7 +16,7 @@ esac
 So you can specify what you want to do with the URL in one of  
 `@primary-default-cmd` `@primary-img-view-cmd` `@primary-tube-view-cmd` (all of them are set to `setsid -f $BROWSER $selected > /dev/null 2>&1` by default)  
 or  
-`@alternate-default-cmd` `@alternate-img-view-cmd` `@alternate-tube-view-cmd` (all of them are set to `echo -n $selected | xclip -in -selection primary -f | xclip -in -selection clipboard` by default)  
+`@alternate-default-cmd` `@alternate-img-view-cmd` `@alternate-tube-view-cmd` (all of them are set to `echo -n $selected | xclip -in -selection primary -f | xclip -in -selection clipboard &>/dev/null` by default)  
 
 primary is bound to `prefix + u` by default, but can be changed by setting `@primary-url-handler-hotkey`  
 alternate is bound to `prefix + U` by default, but can be changed by setting `@alternate-url-handler-hotkey`  

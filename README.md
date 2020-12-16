@@ -1,4 +1,4 @@
-# urlHandler.tmux
+# url-handler-tmux
 
 Url handler will search the currently visible Tmux buffer for URLs.  
 The URLs will be shown in dmenu configured app (rofi by default).  

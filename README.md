@@ -23,6 +23,7 @@ alternate is bound to `prefix + U` by default, but can be changed by setting `@a
 
 ## Installation
 
+### Manual
 Add to `~/.tmux.conf`:
 ```
 # optional set -g options
@@ -31,6 +32,10 @@ set -g @primary-img-view-cmd 'setsid -f feh $selected > /dev/null'
 set -g @primary-tube-view-cmd 'setsid -f mpv $selected > /dev/null'
 # this line is required
 run-shell /path/to/url_handler_tmux.tmux
+```
+### Tpm
+```
+set -g @plugin 'afreakk/url-handler-tmux'
 ```
 
 ## Dependencies

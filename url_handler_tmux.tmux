@@ -24,5 +24,5 @@ ALTERNATE_HOTKEY="$(tmux_get '@alternate-url-handler-hotkey' 'U')"
 
 
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-tmux bind-key   "$PRIMARY_HOTKEY" run-shell "$CURRENT_DIR/scripts/urlHandler.sh '$DMENU_CMD'   '$PRIMARY_DEFAULT_CMD'   '$PRIMARY_IMG_VIEW_CMD'   '$PRIMARY_TUBE_VIEW_CMD'"
-tmux bind-key "$ALTERNATE_HOTKEY" run-shell "$CURRENT_DIR/scripts/urlHandler.sh '$DMENU_CMD' '$ALTERNATE_DEFAULT_CMD' '$ALTERNATE_IMG_VIEW_CMD' '$ALTERNATE_TUBE_VIEW_CMD'"
+tmux bind-key   "$PRIMARY_HOTKEY" run-shell -b "$CURRENT_DIR/scripts/urlHandler.sh '$DMENU_CMD'   '$PRIMARY_DEFAULT_CMD'   '$PRIMARY_IMG_VIEW_CMD'   '$PRIMARY_TUBE_VIEW_CMD'"
+tmux bind-key "$ALTERNATE_HOTKEY" run-shell -b "$CURRENT_DIR/scripts/urlHandler.sh '$DMENU_CMD' '$ALTERNATE_DEFAULT_CMD' '$ALTERNATE_IMG_VIEW_CMD' '$ALTERNATE_TUBE_VIEW_CMD'"

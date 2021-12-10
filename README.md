@@ -37,6 +37,22 @@ run-shell /path/to/url_handler_tmux.tmux
 ```
 set -g @plugin 'afreakk/url-handler-tmux'
 ```
+### Nix and home-manager
+Package derivation is [here](https://github.com/afreakk/mynixrepo)   
+Then use it like this:
+```
+    programs.tmux.plugins = [
+      { 
+        plugin = pkgs.myPackages.url-handler-tmux;
+        extraConfig = ''
+          set -g @dmenu-cmd 'dmenu -l 10'
+          set -g @primary-img-view-cmd 'setsid -f feh $selected > /dev/null'
+          set -g @primary-tube-view-cmd 'setsid -f mpv $selected > /dev/null'
+        '';
+      }
+    ];
+```
+
 
 ## Dependencies
 

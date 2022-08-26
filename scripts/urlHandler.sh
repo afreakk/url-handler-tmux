@@ -7,15 +7,25 @@ IMG_VIEW_CMD=$3
 TUBE_VIEW_CMD=$4
 
 # Regex to look for common URL patterns.
-urlregex="(((http|https)://|www\\.)[a-zA-Z0-9.]+[:]?[a-zA-Z0-9./@$&%?~\\+!,:#=_-]+)"
+urlregex="(((http|https)://|www\\.)[a-zA-Z0-9.]+[:]?[a-zA-Z0-9./@$&%?~\\+\\(\\)!,:#=_-]+)"
+
+# Capture input
+input=$(tmux capture-pane -Jp)
+
+# Check and clean input from weechat TUI client
+if $(echo -e "$input" | grep -E '^.+│.+\|\s.*\s│.*$' > /dev/null); then
+  input=$(echo -e "$input" |         # Print the original input
+    sed -r 's/^(\s+|.+│.+\|\s)//g' | # Strip the channel bar and user info
+    sed -r 's/\s│.*//g' |            # Strip the trailing bar & users
+    tr -d '\n')                      # Remove newlines in order to handle wrapped urls
+fi
 
 # Extract URLs from the currently visible Tmux buffer
-urls="$(tmux capture-pane -Jp |               # Capture the currently visible Tmux contents.
-	tr -d '\n' | sed -r 's/\s│\s+│\s+\|\s//g' | # Remove newlines and TUI sidebars.
-	grep -aEo "$urlregex" |                     # Grep only URLs as defined above.
-	uniq |                                      # Remove neighboring duplicates.
-	sed 's/^www./http:\/\/www\./g' |
-	tac)"                                       # Reverse the link order.
+urls=$(echo -e "$input" |			    # Print the modified input
+  grep -aEo "$urlregex" |         # Grep only URLs as defined above.
+  uniq |                          # Remove neighboring duplicates.
+  sed 's|^www\.|http://www\.|g' | # Prefix url starting with 'www.' with http://.
+  tac)                            # Reverse the link order.
 
 # If no URLs were found exit.
 [ -z "$urls" ] && exit 0

@@ -49,7 +49,7 @@ selected="$(echo "$urls" | $DMENU_CMD)"
 }
 
 case "$selected" in
-  *mkv|*webm|*mp4|*youtube.com/watch*|*youtube.com/playlist*|*youtu.be*|*hooktube.com*|*bitchute.com*|*videos.lukesmith.xyz*)
+  *mkv|*webm|*mp4|*youtube.com/watch*|*youtube.com/playlist*|*youtu.be*|*hooktube.com*|*bitchute.com*|*videos.lukesmith.xyz*|*yewtu.be*)
     eval "$TUBE_VIEW_CMD" ;;
   *png|*jpg|*jpe|*jpeg|*gif)
     eval "$IMG_VIEW_CMD" ;;

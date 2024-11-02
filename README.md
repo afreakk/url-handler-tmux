@@ -18,7 +18,7 @@ esac
 So you can specify what you want to do with the URL in one of  
 `@primary-default-cmd` `@primary-img-view-cmd` `@primary-tube-view-cmd` (all of them are set to `xargs setsid -f $BROWSER` by default)  
 or  
-`@alternate-default-cmd` `@alternate-img-view-cmd` `@alternate-tube-view-cmd` (all of them are set to `xclip -in -selection clipboard` by default)
+`@alternate-default-cmd` `@alternate-img-view-cmd` `@alternate-tube-view-cmd` (all of them are set to `xclip -in -selection primary -f | xclip -in -selection clipboard &>/dev/null` by default)
 
 Primary is bound to `prefix + u` by default, but can be changed by setting `@primary-url-handler-hotkey`  
 alternate is bound to `prefix + U` by default, but can be changed by setting `@alternate-url-handler-hotkey`
@@ -32,8 +32,8 @@ Add to `~/.config/tmux/tmux.conf`:
 ```tmux
 # optional set -g options
 set -g @dmenu-cmd 'dmenu -l 10'
-set -g @primary-img-view-cmd 'setsid -f feh $selected > /dev/null'
-set -g @primary-tube-view-cmd 'setsid -f mpv $selected > /dev/null'
+set -g @primary-img-view-cmd 'xargs setsid -f feh'
+set -g @primary-tube-view-cmd 'xargs setsid -f mpv --force-window=immediate > /dev/null'
 # this line is required
 run-shell /path/to/url_handler_tmux.tmux
 ```
@@ -56,7 +56,7 @@ Then use it like this:
         extraConfig = ''
           set -g @dmenu-cmd 'dmenu -l 10'
           set -g @primary-img-view-cmd 'xargs setsid -f feh'
-          set -g @primary-tube-view-cmd 'xargs setsid -f mpv'
+          set -g @primary-tube-view-cmd 'xargs setsid -f mpv --force-window=immediate'
         '';
       }
     ];

@@ -50,9 +50,9 @@ selected="$(echo "$urls" | $DMENU_CMD)"
 
 case "$selected" in
   *mkv|*webm|*mp4|*youtube.com/watch*|*youtube.com/playlist*|*youtu.be*|*hooktube.com*|*bitchute.com*|*videos.lukesmith.xyz*|*yewtu.be*)
-    echo "$selected" | $TUBE_VIEW_CMD ;;
+    echo "$selected" | eval "$TUBE_VIEW_CMD" 2> /tmp/lolzz ;;
   *png|*jpg|*jpe|*jpeg|*gif)
-    echo "$selected" | $IMG_VIEW_CMD ;;
+    echo "$selected" | eval "$IMG_VIEW_CMD" 2> /tmp/lolzz ;;
   *)
-    echo "$selected" | $DEFAULT_CMD
+    echo "$selected" | eval "$DEFAULT_CMD" 2> /tmp/lolzz 
 esac

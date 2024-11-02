@@ -12,12 +12,12 @@ tmux_get() {
 
 DMENU_CMD="$(tmux_get '@dmenu-cmd' 'rofi -dmenu -i -p \"Open URL\" -l 10')"
 
-PRIMARY_DEFAULT_CMD="$(tmux_get '@primary-default-cmd' 'setsid -f $BROWSER $selected > /dev/null 2>&1')"
+PRIMARY_DEFAULT_CMD="$(tmux_get '@primary-default-cmd' "xargs setsid -f $BROWSER")"
 PRIMARY_IMG_VIEW_CMD="$(tmux_get '@primary-img-view-cmd' "$PRIMARY_DEFAULT_CMD")"
 PRIMARY_TUBE_VIEW_CMD="$(tmux_get '@primary-tube-view-cmd' "$PRIMARY_DEFAULT_CMD")"
 PRIMARY_HOTKEY="$(tmux_get '@primary-url-handler-hotkey' 'u')"
 
-ALTERNATE_DEFAULT_CMD="$(tmux_get '@alternate-default-cmd' 'echo -n $selected | xclip -in -selection primary -f | xclip -in -selection clipboard &>/dev/null')"
+ALTERNATE_DEFAULT_CMD="$(tmux_get '@alternate-default-cmd' 'xclip -in -selection clipboard')"
 ALTERNATE_IMG_VIEW_CMD="$(tmux_get '@alternate-tube-view-cmd' "$ALTERNATE_DEFAULT_CMD")"
 ALTERNATE_TUBE_VIEW_CMD="$(tmux_get '@alternate-tube-view-cmd' "$ALTERNATE_DEFAULT_CMD")"
 ALTERNATE_HOTKEY="$(tmux_get '@alternate-url-handler-hotkey' 'U')"
